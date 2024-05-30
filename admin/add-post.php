@@ -1,40 +1,61 @@
-<?php 
+<?php
 session_start();
 include('includes/config.php');
 error_reporting(0);
-if(strlen($_SESSION['login'])==0)
-{ 
+
+if (strlen($_SESSION['login']) == 0) {
     header('location:index.php');
-}
-else {
-    // For adding post  
-    if(isset($_POST['submit'])) {
+} else {
+    // Function to update sitemap.xml
+    function updateSitemap($newUrl) {
+        $sitemapFile = '../sitemap.xml';
+        if (file_exists($sitemapFile)) {
+            $xml = simplexml_load_file($sitemapFile);
+        } else {
+            $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+        }
+
+        $urlElement = $xml->addChild('url');
+        $urlElement->addChild('loc', $newUrl);
+        $urlElement->addChild('lastmod', date('c'));
+        $urlElement->addChild('priority', '0.80');
+
+        $xml->asXML($sitemapFile);
+    }
+
+    // For adding post
+    if (isset($_POST['submit'])) {
         $posttitle = $_POST['posttitle'];
         $catid = $_POST['category'];
         $postdetails = addslashes($_POST['postdescription']);
         $postedby = $_SESSION['login'];
-        $arr = explode(" ",$posttitle);
-        $url = implode("-",$arr);
+        $arr = explode(" ", $posttitle);
+        $url = implode("-", $arr);
         $imgfile = $_FILES["postimage"]["name"];
         // get the image extension
-        $extension = substr($imgfile,strlen($imgfile)-4,strlen($imgfile));
+        $extension = substr($imgfile, strlen($imgfile) - 4, strlen($imgfile));
         // allowed extensions
-        $allowed_extensions = array(".jpg","jpeg",".png",".gif");
+        $allowed_extensions = array(".jpg", "jpeg", ".png", ".gif");
         // Validation for allowed extensions .in_array() function searches an array for a specific value.
-        if(!in_array($extension,$allowed_extensions)) {
+        if (!in_array($extension, $allowed_extensions)) {
             echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');</script>";
         } else {
-            //rename the image file
-            $imgnewfile = md5($imgfile).$extension;
+            // rename the image file
+            $imgnewfile = md5($imgfile) . $extension;
             // Code for move image into directory
-            move_uploaded_file($_FILES["postimage"]["tmp_name"],"postimages/".$imgnewfile);
+            move_uploaded_file($_FILES["postimage"]["tmp_name"], "postimages/" . $imgnewfile);
             $status = 1;
-            $query = mysqli_query($con,"insert into tblposts(PostTitle,CategoryId,PostDetails,PostUrl,Is_Active,PostImage,postedBy) values('$posttitle','$catid','$postdetails','$url','$status','$imgnewfile','$postedby')");
-            if($query) {
+            $query = mysqli_query($con, "insert into tblposts(PostTitle,CategoryId,PostDetails,PostUrl,Is_Active,PostImage,postedBy) values('$posttitle','$catid','$postdetails','$url','$status','$imgnewfile','$postedby')");
+            if ($query) {
                 $msg = "Post successfully added ";
+
+                // Update sitemap
+                $newPostUrl = "https://www.hellogowda.com/post-details.php?pid=" . mysqli_insert_id($con);
+                updateSitemap($newPostUrl);
+
             } else {
-                $error = "Something went wrong. Please try again.";    
-            } 
+                $error = "Something went wrong. Please try again.";
+            }
         }
     }
 }
@@ -101,10 +122,10 @@ else {
                         <div class="col-md-10 col-md-offset-1">
                             <div class="p-6">
                             <?php if($msg){ ?>
-                                        <div class="alert alert-success" role="alert">
-                                            <strong>Well done!</strong> <?php echo htmlentities($msg);?>
-                                        </div>
-                                        <?php } ?>
+                                <div class="alert alert-success" role="alert">
+                                    <strong>Well done!</strong> <?php echo htmlentities($msg);?>
+                                </div>
+                            <?php } ?>
                                 <div class="">
                                     <form name="addpost" method="post" enctype="multipart/form-data">
                                         <div class="form-group m-b-20">
@@ -117,8 +138,8 @@ else {
                                                 <option value="">Select Category </option>
                                                 <?php
                                                 // Fetching active categories
-                                                $ret = mysqli_query($con,"select id,CategoryName from  tblcategory where Is_Active=1");
-                                                while($result = mysqli_fetch_array($ret)) {    
+                                                $ret = mysqli_query($con, "select id,CategoryName from tblcategory where Is_Active=1");
+                                                while ($result = mysqli_fetch_array($ret)) {
                                                 ?>
                                                 <option value="<?php echo htmlentities($result['id']);?>"><?php echo htmlentities($result['CategoryName']);?></option>
                                                 <?php } ?>
@@ -136,7 +157,7 @@ else {
                                             <div class="col-sm-12">
                                                 <div class="card-box">
                                                     <h4 class="m-b-30 m-t-0 header-title"><b>Feature Image</b></h4>
-                                                    <input type="file" class="form-control" id="postimage" name="postimage"  required>
+                                                    <input type="file" class="form-control" id="postimage" name="postimage" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -145,58 +166,55 @@ else {
                                     </form>
                                 </div>
                             </div> <!-- end p-20 -->
-                            </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-            </div> <!-- container -->
-        </div> <!-- content -->
-        <?php include('includes/footer.php');?>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                </div> <!-- container -->
+            </div> <!-- content -->
+            <?php include('includes/footer.php');?>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Right content here -->
-    <!-- ============================================================== -->
-</div>
-<!-- END wrapper -->
-<script>
-    var resizefunc = [];
-</script>
-<!-- jQuery  -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/detect.js"></script>
-<script src="assets/js/fastclick.js"></script>
-<script src="assets/js/jquery.blockUI.js"></script>
-<script src="assets/js/waves.js"></script>
-<script src="assets/js/jquery.slimscroll.js"></script>
-<script src="assets/js/jquery.scrollTo.min.js"></script>
-<script src="../plugins/switchery/switchery.min.js"></script>
-<!-- Summernote js -->
-<script src="../plugins/summernote/summernote.min.js"></script>
-<!-- Select2 -->
-<script src="../plugins/select2/js/select2.min.js"></script>
-<!-- Jquery filer js -->
-<script src="../plugins/jquery.filer/js/jquery.filer.min.js"></script>
-<!-- page specific js -->
-<script src="assets/pages/jquery.blog-add.init.js"></script>
-<!-- App js -->
-<script src="assets/js/jquery.core.js"></script>
-<script src="assets/js/jquery.app.js"></script>
-<script>
-    jQuery(document).ready(function(){
-        $('.summernote').summernote({
-            height: 240, // set editor height
-            minHeight: null, // set minimum height of editor
-            maxHeight: null, // set maximum height of editor
-            focus: false // set focus to editable area after initializing summernote
+    <!-- END wrapper -->
+    <script>
+        var resizefunc = [];
+    </script>
+    <!-- jQuery  -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/detect.js"></script>
+    <script src="assets/js/fastclick.js"></script>
+    <script src="assets/js/jquery.blockUI.js"></script>
+    <script src="assets/js/waves.js"></script>
+    <script src="assets/js/jquery.slimscroll.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <!-- Jquery filer js -->
+    <script src="../plugins/jquery.filer/js/jquery.filer.min.js"></script>
+    <!-- App js -->
+    <script src="assets/js/jquery.core.js"></script>
+    <script src="assets/js/jquery.app.js"></script>
+    <!-- Summernote js -->
+    <script src="../plugins/summernote/summernote.min.js"></script>
+    <!-- Select 2 js -->
+    <script src="../plugins/select2/js/select2.min.js"></script>
+    <script src="../plugins/switchery/switchery.min.js"></script>
+    <script src="../plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script src="../plugins/jquery.quicksearch/jquery.quicksearch.js"></script>
+    <script>
+        jQuery(document).ready(function(){
+            $('.summernote').summernote({
+                height: 240,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: false                 // set focus to editable area after initializing summernote
+            });
+            $(".select2").select2();
+            $(".select2-limiting").select2({
+                maximumSelectionLength: 2
+            });
         });
-        // Select2
-        $(".select2").select2();
-        $(".select2-limiting").select2({
-            maximumSelectionLength: 2
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
-
-

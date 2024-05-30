@@ -89,12 +89,13 @@ $categoryTree = buildTree($categories);
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Discover tips for achieving financial independence, healthy living, and radiant skin. Learn proven ways to make money online and boost your mood and metabolism with exercise.">
+<meta name="author" content="Gowda">
+<meta name="keywords" content="personal finance, make money online, financial independence, health tips, fitness, skincare, healthy living, radiant skin, exercise, boost mood, metabolism">
 
-    <title>Gowda | Home Page</title>
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

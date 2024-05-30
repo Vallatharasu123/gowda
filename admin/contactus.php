@@ -27,10 +27,13 @@ $error="Something went wrong . Please try again.";
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-        <meta name="author" content="Coderthemes">
+       <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Discover tips for achieving financial independence, healthy living, and radiant skin. Learn proven ways to make money online and boost your mood and metabolism with exercise.">
+<meta name="author" content="Gowda">
+<meta name="keywords" content="personal finance, make money online, financial independence, health tips, fitness, skincare, healthy living, radiant skin, exercise, boost mood, metabolism">
+
+
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
