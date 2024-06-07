@@ -16,17 +16,23 @@
                                 style="object-fit: cover;">
                             <div class="overlay">
                                 <div class="mb-2">
-                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                        href="category.php?cid=<?php echo htmlentities($row['cid']); ?>">
+                                    <?php
+                                    $seoUrl = generateSeoUrl($row['category'], $row['cid']);
+                                    ?>
+                                    <a class="badge badge-primary text-uppercase  p-2 mr-2"
+                                        href="<?php echo $seoUrl; ?>">
                                         <?php echo htmlentities($row['category']); ?>
                                     </a>
                                     <a class="text-white"
-                                        href="post-details.php?pid=<?php echo htmlentities($row['pid']); ?>">
+                                        href="post-details.php?pid=<?php echo htmlentities($row['pid']); ?>&post_title=<?php echo htmlentities($row['posttitle']); ?>">
                                         <?php echo date('M d, Y', strtotime($row['postingdate'])); ?>
                                     </a>
                                 </div>
-                                <a class="h2 m-0 text-white text-uppercase font-weight-bold"
-                                    href="post-details.php?pid=<?php echo htmlentities($row['pid']); ?>">
+                                <?php
+                                    $seoUrl = generateSeoUrlPost($row['posttitle'], $row['pid']);
+                                    ?>
+                                <a class="h2 m-0 text-white text-uppercase "
+                                    href="<?php echo $seoUrl;?>">
                                     <?php echo htmlentities($row['posttitle']); ?>
                                 </a>
                             </div>
@@ -47,8 +53,11 @@
                                     style="object-fit: cover;">
                                 <div class="overlay">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                            href="category.php?cid=<?php echo htmlentities($row1['cid']); ?>">
+                                    <?php
+                                    $seoUrl = generateSeoUrl($row1['category'], $row1['cid']);
+                                    ?>
+                                        <a class="badge badge-primary text-uppercase  p-2 mr-2"
+                                            href="<?php echo $seoUrl; ?>">
                                             <?php echo htmlentities($row1['category']); ?>
                                         </a>
                                         <a class="text-white"
@@ -56,10 +65,13 @@
                                             <small><?php echo date('M d, Y', strtotime($row1['postingdate'])); ?></small>
                                         </a>
                                     </div>
-                                    <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
-                                        href="post-details.php?pid=<?php echo htmlentities($row1['pid']); ?>">
-                                        <?php echo htmlentities($row1['posttitle']); ?>
-                                    </a>
+                                    <?php
+                                    $seoUrl = generateSeoUrlPost($row1['posttitle'], $row1['pid']);
+                                    ?>
+                                <a class="h6 m-0 text-white text-uppercase "
+                                    href="<?php echo $seoUrl;?>">
+                                    <?php echo htmlentities($row1['posttitle']); ?>
+                                </a>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +92,7 @@
     <div class="container-fluid pt-5 mb-3">
         <div class="container">
             <div class="section-title">
-                <h4 class="m-0 text-uppercase font-weight-bold">Popular Posts</h4>
+                <h4 class="m-0 text-uppercase ">Popular Posts</h4>
             </div>
             <div class="owl-carousel news-carousel carousel-item-4 position-relative">
                 <?php while ($row1 = mysqli_fetch_assoc($query1)) { ?>
@@ -89,18 +101,24 @@
                             style="object-fit: cover;">
                         <div class="overlay">
                             <div class="mb-2">
-                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                    href="category.php?cid=<?php echo htmlentities($row1['cid']); ?>">
+                            <?php
+                                    $seoUrl = generateSeoUrl($row1['category'], $row1['cid']);
+                                    ?>
+                                <a class="badge badge-primary text-uppercase  p-2 mr-2"
+                                    href="<?php echo  $seoUrl; ?>">
                                     <?php echo htmlentities($row1['category']); ?>
                                 </a>
                                 <a class="text-white" href="post-details.php?pid=<?php echo htmlentities($row1['pid']); ?>">
                                     <small><?php echo date('M d, Y', strtotime($row1['postingdate'])); ?></small>
                                 </a>
                             </div>
-                            <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
-                                href="post-details.php?pid=<?php echo htmlentities($row1['pid']); ?>">
-                                <?php echo htmlentities($row1['posttitle']); ?>
-                            </a>
+                            <?php
+                                    $seoUrl = generateSeoUrlPost($row1['posttitle'], $row1['pid']);
+                                    ?>
+                                <a class="h6 m-0 text-white text-uppercase "
+                                    href="<?php echo $seoUrl;?>">
+                                    <?php echo htmlentities($row1['posttitle']); ?>
+                                </a>
                         </div>
                     </div>
                 <?php } ?>
@@ -122,7 +140,7 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
 <div class="row">
     <div class="col-12">
         <div class="section-title">
-            <h4 class="m-0 text-uppercase font-weight-bold">Recent Posts</h4>
+            <h4 class="m-0 text-uppercase ">Recent Posts</h4>
             <!-- <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a> -->
         </div>
     </div>
@@ -140,14 +158,21 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
         <img class="img-fluid " width="100px"  src="admin/postimages/<?php echo htmlentities($row['PostImage']); ?>" alt="">
         <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
             <div class="mb-2">
-                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="category.php?cid=<?php echo htmlentities($row['cid']); ?>">
+            <?php
+                                    $seoUrl = generateSeoUrl($row['category'], $row['cid']);
+                                    ?>
+                <a class="badge badge-primary text-uppercase  p-1 mr-2" href="<?php echo  $seoUrl; ?>">
                     <?php echo htmlentities($row['category']); ?>
                 </a>
                 <a class="text-body" href="post-details.php?pid=<?php echo htmlentities($row['pid']); ?>">
                     <small><?php echo date('M d, Y', strtotime($row['postingdate'])); ?></small>
                 </a>
             </div>
-            <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="post-details.php?pid=<?php echo htmlentities($row['pid']); ?>">
+            <?php
+                                    $seoUrl = generateSeoUrlPost($row['posttitle'], $row['pid']);
+                                    ?>
+                               
+            <a class="h6 m-0 text-secondary text-uppercase " href="<?php echo $seoUrl;?>">
                 <?php echo htmlentities($row['posttitle']); ?>
             </a>
         </div>
@@ -174,7 +199,7 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                     <!-- Social Follow Start -->
                     <!-- <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Follow Us</h4>
+                            <h4 class="m-0 text-uppercase ">Follow Us</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-3">
                             <a href="" class="d-block w-100 text-white text-decoration-none mb-3"
@@ -220,7 +245,7 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                     <!-- Ads Start -->
                     <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Advertisement</h4>
+                            <h4 class="m-0 text-uppercase ">Advertisement</h4>
                         </div>
                         <div class="bg-white text-center border border-top-0 p-3">
                             <a href=""><img class="img-fluid" src="img/news-800x500-2.jpg" alt=""></a>
@@ -231,7 +256,7 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                     <!-- Popular News Start -->
                     <!-- <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Tranding News</h4>
+                            <h4 class="m-0 text-uppercase ">Tranding News</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-3">
                             <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
@@ -239,11 +264,11 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                                 <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                        <a class="badge badge-primary text-uppercase  p-1 mr-2"
                                             href="">Business</a>
                                         <a class="text-body" href=""><small>Jan 01, 2045</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
+                                    <a class="h6 m-0 text-secondary text-uppercase " href="">Lorem ipsum
                                         dolor sit amet elit...</a>
                                 </div>
                             </div>
@@ -252,11 +277,11 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                                 <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                        <a class="badge badge-primary text-uppercase  p-1 mr-2"
                                             href="">Business</a>
                                         <a class="text-body" href=""><small>Jan 01, 2045</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
+                                    <a class="h6 m-0 text-secondary text-uppercase " href="">Lorem ipsum
                                         dolor sit amet elit...</a>
                                 </div>
                             </div>
@@ -265,11 +290,11 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                                 <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                        <a class="badge badge-primary text-uppercase  p-1 mr-2"
                                             href="">Business</a>
                                         <a class="text-body" href=""><small>Jan 01, 2045</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
+                                    <a class="h6 m-0 text-secondary text-uppercase " href="">Lorem ipsum
                                         dolor sit amet elit...</a>
                                 </div>
                             </div>
@@ -278,11 +303,11 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                                 <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                        <a class="badge badge-primary text-uppercase  p-1 mr-2"
                                             href="">Business</a>
                                         <a class="text-body" href=""><small>Jan 01, 2045</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
+                                    <a class="h6 m-0 text-secondary text-uppercase " href="">Lorem ipsum
                                         dolor sit amet elit...</a>
                                 </div>
                             </div>
@@ -291,11 +316,11 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                                 <div
                                     class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
                                     <div class="mb-2">
-                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                        <a class="badge badge-primary text-uppercase  p-1 mr-2"
                                             href="">Business</a>
                                         <a class="text-body" href=""><small>Jan 01, 2045</small></a>
                                     </div>
-                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Lorem ipsum
+                                    <a class="h6 m-0 text-secondary text-uppercase " href="">Lorem ipsum
                                         dolor sit amet elit...</a>
                                 </div>
                             </div>
@@ -308,7 +333,7 @@ $query = mysqli_query($con, "SELECT tblposts.id AS pid, tblposts.PostTitle AS po
                     <!-- Tags Start -->
                     <div class="mb-3">
                         <div class="section-title mb-0">
-                            <h4 class="m-0 text-uppercase font-weight-bold">Tags</h4>
+                            <h4 class="m-0 text-uppercase ">Tags</h4>
                         </div>
                         <div class="bg-white border border-top-0 p-3">
                             <div class="d-flex flex-wrap m-n1">
@@ -337,14 +362,14 @@ function fetchCategories($parentCategory = NULL, $level = 0) {
 
     return $categories;
 }
-
 // Fetch categories and subcategories recursively
 $categories = fetchCategories();
 
 // Display categories and subcategories as buttons
 foreach ($categories as $category) {
     $indentation = str_repeat("&nbsp;&nbsp;&nbsp;&nbsp;", $category['level']);
-    echo '<a href="category.php?catid='.$category['id'].'" class="btn btn-sm btn-outline-secondary m-1">' . $indentation . $category['name'] . '</a><br>';
+    $seoUrl = generateSeoUrl($category['name'], $category['id']);
+    echo '<a href="' . $seoUrl . '" class="btn btn-sm btn-outline-primary m-1">' . $indentation . $category['name'] . '</a><br>';
 }
 ?>
 

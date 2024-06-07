@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Rule for category.php
+RewriteRule ^category-([a-zA-Z0-9-%]+)-([0-9]+)$ category.php?category_name=$1&catid=$2 [L,QSA]
+
+# Rule for post-details.php
+RewriteRule ^post-([a-zA-Z0-9-%]+)-([0-9]+)$ post-details.php?post_title=$1&pid=$2 [L,QSA]

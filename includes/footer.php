@@ -1,10 +1,10 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark pt-5 px-sm-3 px-md-5 mt-5">
+    <div class=" footer container-fluid bg-info pt-5 px-sm-3 px-md-5 mt-5">
         <div class="row py-4">
             <div class="col-md-4 mb-5">
-                <h5 class="mb-4 text-white text-uppercase font-weight-bold">Get In Touch</h5>
+                <h5 class=" text-white text-uppercase ">Get In Touch</h5>
                 <?php 
 $pagetype='contactus';
 $query=mysqli_query($con,"select PageTitle,Description from tblpages where PageName='$pagetype'");
@@ -25,69 +25,65 @@ while($row=mysqli_fetch_array($query))
       <!-- /.row -->
 <?php } ?>
     
-                <h6 class="mt-4 mb-3 text-white text-uppercase font-weight-bold">Follow Us</h6>
+                <h6 class="mt-4 mb-2 text-white text-uppercase ">Follow Us</h6>
                 <div class="d-flex justify-content-start">
                 <?php
                       $query = mysqli_query($con, "SELECT name, htmlCode, socialLink FROM tblsocialmedia WHERE status=1");
                       while($row = mysqli_fetch_array($query)) {
                           echo '
-                                  <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="' . htmlentities($row['socialLink']) . '">' . $row['htmlCode'] . '</a>
+                                  <a class="btn btn-lg btn-primary btn-lg-square mr-2" href="' . htmlentities($row['socialLink']) . '">' . $row['htmlCode'] . '</a>
                               ';
                       }
                       ?>
                   
                 </div>
             </div>
-           
-            <div class=" col-md-8 mb-5">
-                <h5 class="mb-4 text-white text-uppercase font-weight-bold">Categories</h5>
-                <div class="m-n1 d-flex flex-wrap">
-                <?php
-                                // Function to fetch categories and subcategories recursively<?php
-function fetchCategoriesa($parentCategory = NULL, $level = 0) {
-    global $con;
-    
-    $categories = array();
-
-    // Query to fetch categories based on the parent category
-    $query = "SELECT * FROM tblcategory WHERE Parent_Category " . ($parentCategory ? "= $parentCategory" : "IS NULL") . " AND Is_Active=1 ORDER BY id DESC";
-    $result = mysqli_query($con, $query);
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        // Add the category to the array
-        $categories[] = array(
-            'id' => $row['id'],
-            'name' => $row['CategoryName'],
-            'level' => $level
-        );
-
-        // Fetch subcategories recursively
-        $categories = array_merge($categories, fetchCategoriesa($row['id'], $level + 1));
-    }
-
-    return $categories;
-}
-
-// Fetch categories and subcategories recursively
-$categories = fetchCategoriesa();
-
-// Display categories and subcategories as buttons
-foreach ($categories as $category) {
-    $indentation = str_repeat("", $category['level']);
-    echo '<a href="category.php?catid='.$category['id'].'" class="btn btn-sm btn-secondary m-1">' . $indentation . $category['name'] . '</a><br>';
-}
-?>
+        <div class="col-md-4">
+        <h5 class="mb-2 text-white text-uppercase ">About</h5>
+        <ul class="navbar-nav ml-2">
+                       
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="about-us.php">About Us</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="contact-us.php">Contact  Us</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="terms-and-conditions.php">Terms And Condition </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="privacy-policy.php">Privacy Policy </a>
+                        </li>
+                      
+                    </ul>
+        </div>
+        <div class="col-md-4 ">
+                <!-- for subscription -->
+                <h5 class="mb-3 text-white text-uppercase  p-2 rounded">Subscribe to our NEWSLETTER</h5>
+                <form action="subscribe.php" method="post" class="bg-light p-4 rounded shadow">
+                    <div class="form-group">
+                        <label for="email" class="text-dark">Enter your email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Subscribe</button>
+                </form>
+            </div>
+            <div class=" col-md-12 ">
+                <h5 class="mb-4 text-white text-uppercase ">Categories</h5>
+                <div class="cat-foot  flex-wrap">
+                <?php renderTree($categoryTree); ?>
 
                 </div>
             </div>
-          
         </div>
+           
+       
     </div>
-    <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
-        <p class="m-0 text-center">&copy; <a href="#">Thimme Gowda</a>. All Rights Reserved.
+    <div class="container-fluid py-4 px-sm-3 px-md-5 bg-primary text-white">
+        <p class="m-0 text-center">&copy; <a href="index.php">hellogowda.com</a>. All Rights Reserved.
 
             <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-            Design by <a href="https://kenstacktechnologies.com">Kenstack Technologies</a><br>
+            Designed by <a href="https://kenstacktechnologies.com">Kenstack Technologies</a><br>
          
         </p>
     </div>
@@ -108,7 +104,16 @@ foreach ($categories as $category) {
     <script src="js/main.js"></script>
 
 
+<?php
+if(isset($_GET['catid'])){
+?>
+<script>
+$("title").html("HelloGowda | " + $("h1:eq(2)").text());
+</script>
 
+<?php 
+}
+?>
 
 
 

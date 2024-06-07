@@ -25,6 +25,8 @@ $sql = "WITH RECURSIVE CategoryHierarchy AS (
                 tblcategory c
             INNER JOIN 
                 CategoryHierarchy ch ON c.Parent_Category = ch.id
+            WHERE
+            Is_Active = 1
         )
         SELECT 
             id, 
@@ -33,7 +35,8 @@ $sql = "WITH RECURSIVE CategoryHierarchy AS (
             path
         FROM 
             CategoryHierarchy
-        ORDER BY path";
+        
+        ";
 
 // Execute the query
 $result = mysqli_query($con, $sql);
@@ -66,14 +69,24 @@ function buildTree(array $elements, $parentId = null)
     }
     return $branch;
 }
-
+// Function to generate SEO-friendly URLs
+function generateSeoUrl($categoryName, $categoryId) {
+    // Convert to lowercase
+    $categoryName = strtolower($categoryName);
+    // Replace spaces with hyphens
+    $categoryName = str_replace(' ', '-', $categoryName);
+    // Remove special characters
+    $categoryName = preg_replace('/[^a-z0-9-]/', '', $categoryName);
+    return "category-".$categoryName . '-' . $categoryId;
+}
 // Function to render the category tree
 function renderTree($tree)
 {
     echo '<ul>';
     foreach ($tree as $branch) {
         echo '<li>';
-        echo '<a href="category.php?catid=' . $branch['id'] . '">' . $branch['CategoryName'] . '</a>';
+        $seoUrl = generateSeoUrl($branch['CategoryName'], $branch['id']);
+        echo '<a href="' . $seoUrl . '">' . $branch['CategoryName'] . '</a>';
         if (isset($branch['children'])) {
             renderTree($branch['children']);
         }
@@ -94,12 +107,11 @@ $categoryTree = buildTree($categories);
 <meta name="description" content="Discover tips for achieving financial independence, healthy living, and radiant skin. Learn proven ways to make money online and boost your mood and metabolism with exercise.">
 <meta name="author" content="Gowda">
 <meta name="keywords" content="personal finance, make money online, financial independence, health tips, fitness, skincare, healthy living, radiant skin, exercise, boost mood, metabolism">
-
-
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>HelloGowda </title>
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -108,46 +120,47 @@ $categoryTree = buildTree($categories);
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css?v=2" rel="stylesheet">
 
 </head>
 
 <body>
     <!-- Topbar Start -->
+    
     <div class="container-fluid d-none d-lg-block">
-        <div class="row align-items-center bg-dark px-lg-5">
+        <div class="row align-items-center bg-primary  px-lg-5">
             <div class="col-lg-9">
-                <nav class="navbar navbar-expand-sm bg-dark p-0">
+                <nav class="navbar navbar-expand-sm  p-0">
                     <ul class="navbar-nav ml-n2">
-                        <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" id="currentDate" href="#"></a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white small" id="currentDate" href="#"></a>
                         </li>
-                        <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="about-us.php">About</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white small" href="about-us.php">About</a>
                         </li>
-                        <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="contact-us.php">Contact </a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white small" href="contact-us.php">Contact </a>
                         </li>
-                        <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="terms-and-conditions.php">Terms And Condition </a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white small" href="terms-and-conditions.php">Terms And Condition </a>
                         </li>
-                        <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="privacy-policy.php">Privacy Policy </a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white small" href="privacy-policy.php">Privacy Policy </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-body small" href="admin/">Login</a>
+                            <a class="nav-link text-white small" href="admin/">Login</a>
                         </li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-3 text-right d-none d-md-block">
-                <nav class="navbar navbar-expand-sm bg-dark p-0">
+                <nav class="navbar navbar-expand-sm  p-0">
                     <ul class="navbar-nav ml-auto mr-n2">
                       <?php
                       $query = mysqli_query($con, "SELECT name, htmlCode, socialLink FROM tblsocialmedia WHERE status=1");
                       while($row = mysqli_fetch_array($query)) {
                           echo '<li class="nav-item">
-                                  <a class="nav-link text-body " href="' . htmlentities($row['socialLink']) . '">' . $row['htmlCode'] . '</a>
+                                  <a class="nav-link text-white " href="' . htmlentities($row['socialLink']) . '">' . $row['htmlCode'] . '</a>
                                 </li>';
                       }
                       ?>
@@ -157,7 +170,8 @@ $categoryTree = buildTree($categories);
         </div>
         <div class="row align-items-center bg-white py-3 px-lg-5">
             <div class="col-lg-4">
-                <a href="index.html" class="navbar-brand p-0 d-none d-lg-block">
+                <a href="index.php" class="navbar-brand p-0 d-none d-lg-flex align-items-center">
+                    <img src="img/logo.png" alt="hellogowda logo " class="d-inline-bllock " width="100">
                     <h1 class="m-0 display-4 text-uppercase text-primary">Hello<span
                             class="text-secondary font-weight-normal">Gowda</span></h1>
                 </a>
@@ -171,83 +185,7 @@ $categoryTree = buildTree($categories);
     </div>
     <!-- Topbar End -->
 
-    <style>
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            /* background: #ffcc00; */
-        }
-
-        ul li {
-            display: block;
-            position: relative;
-            float: left;
-            /* background: #ffcc00; */
-        }
-
-        li ul {
-            display: none;
-            position: absolute;
-            z-index: 999;
-            min-width: 200px;
-            border-radius: 10px;
-        }
-
-        ul li a {
-            display: block;
-            padding: 1em;
-            text-decoration: none;
-            white-space: nowrap;
-            color: #fff;
-        }
-
-        ul li a:hover {
-            background: #ffcc00;
-            color: #000;
-            text-decoration: none;
-
-        }
-
-        li:hover>ul {
-            display: block;
-            position: absolute;
-        }
-
-        li:hover li {
-            float: none;
-        }
-
-        li:hover a {
-            background: #ffcc00;
-        }
-
-        li:hover li a:hover {
-            background: white;
-            color: #000;
-        }
-
-        .main-navigation li ul li {
-            border-top: 0;
-        }
-
-        ul ul ul {
-            left: 100%;
-            top: 0;
-        }
-
-        ul:before,
-        ul:after {
-            content: " ";
-            /* 1 */
-            display: table;
-            /* 2 */
-        }
-
-        ul:after {
-            clear: both;
-        }
-    </style>
+   
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
@@ -268,8 +206,8 @@ $categoryTree = buildTree($categories);
 
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-                        <ul class="main-navigation">
-                            <li><a href="#">Home</a></li>
+                        <ul class="main-navigation border-right border-white mr-2">
+                            <li class="mx-1"><a href="index.php">Home</a></li>
 
                         </ul>
                         <?php renderTree($categoryTree); ?>
@@ -291,3 +229,15 @@ $categoryTree = buildTree($categories);
     </div>
     <!-- Navbar End -->
 
+<?php
+
+function generateSeoUrlPost($title, $id) {
+    // Convert to lowercase
+    $title = strtolower($title);
+    // Replace spaces with hyphens
+    $title = str_replace(' ', '-', $title);
+    // Remove special characters
+    $title = preg_replace('/[^a-z0-9-]/', '', $title);
+    return "post-".$title . '-' . $id;
+}
+?>
