@@ -4,7 +4,7 @@
                 <div class="topbar-left">
                     <a href="index.php" class="logo"><span>Hello<span>Gowda</span></span><i class="mdi mdi-layers"></i></a>
                     <!-- Image logo -->
-                    <!--<a href="index.html" class="logo">-->
+                    <!--<a href="index.php" class="logo">-->
                         <!--<span>-->
                             <!--<img src="assets/images/logo.png" alt="" height="30">-->
                         <!--</span>-->

@@ -46,7 +46,7 @@ $error="Old Password not match !!";
 <html lang="en">
     <head>
 
-        <title>Gowda | Add Category</title>
+        <title>HelloGowda | Change Password</title>
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />

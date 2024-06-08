@@ -39,7 +39,7 @@ echo "<script type='text/javascript'> document.location = 'index.php'; </script>
 
 
         <!-- App title -->
-        <title>Gowda | Forgot Password</title>
+        <title>HelloGowda | Forgot Password</title>
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />

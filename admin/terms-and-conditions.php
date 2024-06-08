@@ -30,7 +30,7 @@ else{
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
     <meta name="author" content="Coderthemes">
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <title>Gowda | Terms and Conditions Page</title>
+    <title>HelloGowda | Terms and Conditions Page</title>
     <link href="../plugins/summernote/summernote.css" rel="stylesheet" />
     <link href="../plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="../plugins/jquery.filer/css/jquery.filer.css" rel="stylesheet" />

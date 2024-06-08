@@ -45,8 +45,10 @@ while ($row=mysqli_fetch_array($query)) {
        <img class="card-img-top" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>" alt="<?php echo htmlentities($row['posttitle']);?>">
             <div class="card-body">
               <h2 class="card-title"><?php echo htmlentities($row['posttitle']);?></h2>
-           
-              <a href="post-details.php?pid=<?php echo htmlentities($row['pid'])?>" class="btn btn-primary">Read More &rarr;</a>
+              <?php
+                                    $seoUrl = generateSeoUrlPost($row['posttitle'], $row['pid']);
+                                    ?>
+              <a href="<?php echo $seoUrl;?>" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
               Posted on <?php echo htmlentities($row['postingdate']);?>

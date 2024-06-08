@@ -71,7 +71,7 @@ else {
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <!-- App title -->
-    <title>Gowda | Add Post</title>
+    <title>HelloGowda | Edit Post</title>
     <!-- Summernote css -->
     <link href="../plugins/summernote/summernote.css" rel="stylesheet" />
     <!-- Select2 -->

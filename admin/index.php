@@ -35,7 +35,7 @@ echo "<script>alert('Invalid Details');</script>";
 
 
         <!-- App title -->
-        <title>Gowda | Admin Panel</title>
+        <title>HelloGowda | Admin Panel</title>
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -64,7 +64,7 @@ echo "<script>alert('Invalid Details');</script>";
                             <div class="m-t-40 account-pages">
                                 <div class="text-center account-logo-box">
                                     <h2 class="text-uppercase">
-                                        <a href="index.html" class="text-success">
+                                        <a href="index.php" class="text-success">
                                             <span><img src="assets/images/logo.png" alt="" height="56"></span>
                                         </a>
                                     </h2>
@@ -72,7 +72,7 @@ echo "<script>alert('Invalid Details');</script>";
                                 </div>
                                 <div class="account-content">
                                     <form class="form-horizontal" method="post">
-
+<h1>HelloGowda | Admin Panel</h1>
                                         <div class="form-group ">
                                             <div class="col-xs-12">
                                                 <input class="form-control" type="text" required="" name="username" placeholder="Username or email" autocomplete="off">

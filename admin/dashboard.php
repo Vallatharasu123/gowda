@@ -19,7 +19,7 @@ else{
 
 
         <!-- App title -->
-        <title>Post Portal | Dashboard</title>
+        <title>HelloGowda | Dashboard</title>
 		<link rel="stylesheet" href="../plugins/morris/morris.css">
 
         <!-- App css -->
@@ -46,9 +46,9 @@ else{
 
                 <!-- LOGO -->
                 <div class="topbar-left">
-                    <a href="index.html" class="logo"><span>NP<span>Admin</span></span><i class="mdi mdi-layers"></i></a>
+                    <a href="index.php" class="logo"><span>NP<span>Admin</span></span><i class="mdi mdi-layers"></i></a>
                     <!-- Image logo -->
-                    <!--<a href="index.html" class="logo">-->
+                    <!--<a href="index.php" class="logo">-->
                         <!--<span>-->
                             <!--<img src="assets/images/logo.png" alt="" height="30">-->
                         <!--</span>-->

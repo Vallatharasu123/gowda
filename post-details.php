@@ -135,7 +135,7 @@ function copyToClipboard(text) {
                 <hr />
 
  <img class="img-fluid rounded" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>" alt="<?php echo htmlentities($row['posttitle']);?>">
-  
+    <meta property="og:image" content="admin/postimages/<?php echo htmlentities($row['PostImage']);?>">
               <p class="card-text"><?php 
 $pt=$row['postdetails'];
               echo  (substr($pt,0));?></p>
