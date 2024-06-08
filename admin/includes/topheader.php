@@ -2,7 +2,7 @@
 
                 <!-- LOGO -->
                 <div class="topbar-left">
-                    <a href="index.html" class="logo"><span>Hello<span>Gowda</span></span><i class="mdi mdi-layers"></i></a>
+                    <a href="index.php" class="logo"><span>Hello<span>Gowda</span></span><i class="mdi mdi-layers"></i></a>
                     <!-- Image logo -->
                     <!--<a href="index.html" class="logo">-->
                         <!--<span>-->

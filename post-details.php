@@ -112,10 +112,25 @@ while ($row=mysqli_fetch_array($query)) {
           <?php if($row['lastUpdatedBy']!=''):?>
           <b>Last Updated by </b> <?php echo htmlentities($row['lastUpdatedBy']);?> on </b><?php echo htmlentities($row['UpdationDate']);?></p>
         <?php endif;?>
-                <p><strong>Share:</strong> <a href="https://www.facebook.com/share.php?u=<?php echo $currenturl;?>" target="_blank">Facebook</a> | 
+                <p><strong>Share:</strong> 
+                <a href="https://www.facebook.com/share.php?u=<?php echo $currenturl;?>" target="_blank">Facebook</a> | 
 <a href="https://twitter.com/share?url=<?php echo $currenturl;?>" target="_blank">Twitter</a> |
-<a href="https://web.whatsapp.com/send?text=<?php echo $currenturl;?>" target="_blank">Whatsapp</a> | 
-<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $currenturl;?>" target="_blank">Linkedin</a>  <b>Visits:</b> <?php print $visits; ?>
+<a href="https://web.whatsapp.com/send?text=<?php echo $currenturl;?>" target="_blank">WhatsApp</a> | 
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $currenturl;?>" target="_blank">LinkedIn</a> | 
+<a href="#" onclick="copyToClipboard('<?php echo $currenturl; ?>'); alert('URL copied to clipboard. Now share it on Instagram!');">Instagram</a>
+
+<script>
+function copyToClipboard(text) {
+    var tempInput = document.createElement('input');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+}
+</script>
+
+                <b>Visits:</b> <?php print $visits; ?>
                 </p>
                 <hr />
 

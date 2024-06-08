@@ -78,14 +78,19 @@ echo "<script>alert('Invalid Details');</script>";
                                                 <input class="form-control" type="text" required="" name="username" placeholder="Username or email" autocomplete="off">
                                             </div>
                                         </div>
-<a href="forgot-password.php"><i class="mdi mdi-lock"></i> Forgot your password?</a>
-<hr>
+
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <input class="form-control" type="password" name="password" required="" placeholder="Password" autocomplete="off">
                                             </div>
                                         </div>
 
+                                    <!-- <div class="clearfix"></div> -->
+                                    <div class="row justify-content-center">
+                                     <a href="forgot-password.php"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                     <a href="../index.php" class="pull-right"><i class="mdi mdi-home"></i> Back Home</a>
+                                     </div>
+                                   
 
                      
                                         <div class="form-group account-btn text-center m-t-10">
@@ -96,8 +101,6 @@ echo "<script>alert('Invalid Details');</script>";
 
                                     </form>
 
-                                    <div class="clearfix"></div>
-<a href="../index.php"><i class="mdi mdi-home"></i> Back Home</a>
                                 </div>
                             </div>
                             <!-- end card-box-->

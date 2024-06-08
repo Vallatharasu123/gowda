@@ -61,7 +61,10 @@
                                 <a href="socialmedia.php" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Social Media </span> </a>
                          
                             </li>   
-
+                            <li class="has_sub">
+                                <a href="manage-subscriptions.php" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Subscription </span> </a>
+                         
+                            </li> 
                         </ul>
                     </div>
                     <!-- Sidebar -->
