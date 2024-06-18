@@ -4,27 +4,7 @@
     <div class=" footer container-fluid bg-info pt-5 px-sm-3 px-md-5 mt-5">
         <div class="row py-4">
             <div class="col-md-4 mb-5">
-                <h5 class=" text-white text-uppercase ">Get In Touch</h5>
-                <?php 
-$pagetype='contactus';
-$query=mysqli_query($con,"select PageTitle,Description from tblpages where PageName='$pagetype'");
-while($row=mysqli_fetch_array($query))
-{
-
-?>
-   
-    
-      <!-- Intro Content -->
-      <div class="row">
-
-        <div class="col-lg-12">
-
-          <p><?php echo $row['Description'];?></p>
-        </div>
-      </div>
-      <!-- /.row -->
-<?php } ?>
-    
+                
                 <h6 class="mt-4 mb-2 text-white text-uppercase ">Follow Us</h6>
                 <div class="d-flex justify-content-start">
                 <?php
@@ -114,7 +94,16 @@ $("title").html("HelloGowda | " + $("h1:eq(2)").text());
 <?php 
 }
 ?>
+<?php
+if(isset($_GET['pid'])){
+?>
+<script>
+$("title").html("HelloGowda | " + $("h2.card-title").text());
+</script>
 
+<?php 
+}
+?>
 
 
 

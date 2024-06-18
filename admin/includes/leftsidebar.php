@@ -60,7 +60,11 @@
                             <li class="has_sub">
                                 <a href="socialmedia.php" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Social Media </span> </a>
                          
-                            </li>   
+                            </li> 
+                            <li class="has_sub">
+                                <a href="messages.php" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Contact Forum </span> </a>
+                         
+                            </li>  
                             <li class="has_sub">
                                 <a href="manage-subscriptions.php" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Subscription </span> </a>
                          

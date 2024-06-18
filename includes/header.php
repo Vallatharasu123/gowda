@@ -107,7 +107,7 @@ $categoryTree = buildTree($categories);
 <meta name="description" content="Discover tips for achieving financial independence, healthy living, and radiant skin. Learn proven ways to make money online and boost your mood and metabolism with exercise.">
 <meta name="author" content="Gowda">
 <meta name="keywords" content="personal finance, make money online, financial independence, health tips, fitness, skincare, healthy living, radiant skin, exercise, boost mood, metabolism">
-<title>HelloGowda </title>
+<title>HelloGowda | Home </title>
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

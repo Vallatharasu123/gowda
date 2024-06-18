@@ -9788,6 +9788,9 @@ h6,
 
 }
 .cat-foot> ul >li{
-  border-right: 2px solid white;
+  /* border-right: 2px solid white; */
   padding:0 10px;
+}
+.cat-foot> ul >li>a{
+  text-decoration: underline;
 }
